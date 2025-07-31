@@ -1,0 +1,34 @@
+import pandas as pd
+import mysql.connector
+from sqlalchemy import create_engine
+
+# Connection string 
+user = 
+password = 
+host = 
+database = 
+
+# SQLAlchemy connection
+engine = create_engine(f"mysql+mysqlconnector://{user}:{password}@{host}/{database}")
+
+# List of CSVs and their desired SQL table names
+csv_tables = {
+    "IncomeStatement_2025-07-15.csv": "income_statement",
+    "BalanceSheet_2025-07-15.csv": "balance_sheet",
+    "CashFlow_2025-07-15.csv": "cash_flow",
+    "StockHistory_2025-07-15.csv": "stock_history"
+}
+
+# Path to folder where your CSVs are
+data_folder = r"C:
+
+# Loop through and upload each table
+for file_name, table_name in csv_tables.items():
+    path = f"{data_folder}\\{file_name}"
+    df = pd.read_csv(path)
+    
+    # Upload to SQL 
+    df.to_sql(table_name, con=engine, if_exists="replace", index=False)
+    print(f"Uploaded {file_name} to table `{table_name}`")
+
+print("All files uploaded successfully!")
