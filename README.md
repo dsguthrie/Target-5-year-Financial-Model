@@ -26,8 +26,8 @@ This project is a complete 5-year financial forecast and valuation model of Targ
 
 - **Forecast Horizon:** 2026–2030  
 - **Scenario Analysis:** Bull, Base, Bear  
-- **Valuation Techniques:** DCF with terminal value, GGM, Exit Multiple  
-- **Output Metrics:** Revenue, EBITDA, UFCF, ROIC, Share Price  
+- **Key Valuation Techniques:** DCF with terminal value, GGM, Exit Multiple, Present Value of Terminal Value, Enterprise Value, Equity Value   
+- **Key Output Metrics:** Revenue, EBITDA, UFCF, ROIC, Share Price, Net Income, WACC, EPS, P/E Ratio, Diluted Shares Outstanding  
 - **Key Conclusion:** Target shows stable cash flow but limited growth, declining ROIC, and slight share price erosion due to valuation multiple compression.
 
 
@@ -41,15 +41,14 @@ This project is a complete 5-year financial forecast and valuation model of Targ
 
 # Notes
 
-- All data sourced via public APIs (yfinance)
+- All data sourced via public APIs (yfinance), except via St. Louis Fed Research (FRED)
 - No API keys, credentials, or confidential information are exposed
 - Excel model is published as read-only
 - Power BI visuals not included due to proprietary formatting
 
----
 
 # Contact
 
 Drake Guthrie  
-[LinkedIn](https://www.linkedin.com/in/YOUR-LINKEDIN)  
+[LinkedIn] (www.linkedin.com/in/drake-guthrie-190691234)  
 GitHub: [@yourusername](https://github.com/yourusername)
