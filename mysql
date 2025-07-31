@@ -1,0 +1,1381 @@
+### TARGET HISTORICAL DATABASE
+
+Create Database target_financials;
+
+Use target_financials;
+
+
+### INCOME STATEMENT HISTORICAL DATA
+
+CREATE OR REPLACE VIEW Financial_Fact AS
+
+-- Revenue & Top Line
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d') AS date_key,
+    'Revenue & Top Line' AS category, 
+    'Total_Revenue' AS metric, 
+    `Total Revenue` AS value,
+    'USD' AS unit
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Revenue & Top Line',
+    'Operating_Revenue',
+    `Operating Revenue`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Revenue & Top Line',
+    'Gross_Profit',
+    `Gross Profit`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Revenue & Top Line',
+    'Cost_Of_Revenue',
+    `Cost Of Revenue`,
+    'USD'
+FROM income_statement
+
+-- Operating Performance
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operating Performance',
+    'Operating_Income',
+    `Operating Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operating Performance',
+    'Operating_Expenses',
+    `Operating Expense`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operating Performance',
+    'SGA',
+    `Selling General And Administration`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operating Performance',
+    'EBITDA',
+    `EBITDA`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operating Performance',
+    'EBIT',
+    `EBIT`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operating Performance',
+    'Depreciation_Amortization',
+    `Depreciation And Amortization In Income Statement`,
+    'USD'
+FROM income_statement
+
+-- Profitability
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Profitability',
+    'Net_Income',
+    `Net Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Profitability',
+    'Net_Income_Continuing_Operations',
+    `Net Income Continuous Operations`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Profitability',
+    'Net_Income_Including_Noncontrolling_Interests',
+    `Net Income Including Noncontrolling Interests`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Profitability',
+    'Pretax_Income',
+    `Pretax Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Profitability',
+    'Tax_Provision',
+    `Tax Provision`,
+    'USD'
+FROM income_statement
+
+-- Per Share & Earnings
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Per Share & Earnings',
+    'EPS_Diluted',
+    `Diluted EPS`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Per Share & Earnings',
+    'EPS_Basic',
+    `Basic EPS`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Per Share & Earnings',
+    'Diluted_Average_Shares',
+    `Diluted Average Shares`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Per Share & Earnings',
+    'Basic_Average_Shares',
+    `Basic Average Shares`,
+    'USD'
+FROM income_statement
+
+-- Other Income & Interest
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Other Income & Interest',
+    'Interest_Expense',
+    `Interest Expense`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Other Income & Interest',
+    'Net_Interest_Income',
+    `Net Interest Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Other Income & Interest',
+    'Other_Income_Expense',
+    `Other Income Expense`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Other Income & Interest',
+    'Normalized_Income',
+    `Normalized Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Other Income & Interest',
+    'Normalized_EBITDA',
+    `Normalized EBITDA`,
+    'USD'
+FROM income_statement
+
+-- Operational Add-ons
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operational Add-ons',
+    'Reconciled_Cost_Of_Revenue',
+    `Reconciled Cost Of Revenue`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y-%m-%d'),
+    'Operational Add-ons',
+    'Reconciled_Depreciation',
+    `Reconciled Depreciation`,
+    'USD'
+FROM income_statement;
+
+
+
+-- TESTING V2; INCOME STATEMENT HISTORICAL DATA AND ORGANIZATION (PLUS DATE.DIM CREATION)
+
+
+CREATE OR REPLACE VIEW Financial_Fact_V2 AS
+
+-- Revenue & Top Line
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d') AS date_key,
+    'Revenue & Top Line' AS category, 
+    'Total_Revenue' AS metric, 
+    `Total Revenue` AS value,
+    'USD' AS unit
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Revenue & Top Line',
+    'Operating_Revenue',
+    `Operating Revenue`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Revenue & Top Line',
+    'Gross_Profit',
+    `Gross Profit`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Revenue & Top Line',
+    'Cost_Of_Revenue',
+    `Cost Of Revenue`,
+    'USD'
+FROM income_statement
+
+-- Operating Performance
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operating Performance',
+    'Operating_Income',
+    `Operating Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operating Performance',
+    'Operating_Expenses',
+    `Operating Expense`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operating Performance',
+    'SGA',
+    `Selling General And Administration`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operating Performance',
+    'EBITDA',
+    `EBITDA`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operating Performance',
+    'EBIT',
+    `EBIT`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operating Performance',
+    'Depreciation_Amortization',
+    `Depreciation And Amortization In Income Statement`,
+    'USD'
+FROM income_statement
+
+-- Profitability
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Profitability',
+    'Net_Income',
+    `Net Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Profitability',
+    'Net_Income_Continuing_Operations',
+    `Net Income Continuous Operations`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Profitability',
+    'Net_Income_Including_Noncontrolling_Interests',
+    `Net Income Including Noncontrolling Interests`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Profitability',
+    'Pretax_Income',
+    `Pretax Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Profitability',
+    'Tax_Provision',
+    `Tax Provision`,
+    'USD'
+FROM income_statement
+
+-- Per Share & Earnings
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Per Share & Earnings',
+    'EPS_Diluted',
+    `Diluted EPS`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Per Share & Earnings',
+    'EPS_Basic',
+    `Basic EPS`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Per Share & Earnings',
+    'Diluted_Average_Shares',
+    `Diluted Average Shares`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Per Share & Earnings',
+    'Basic_Average_Shares',
+    `Basic Average Shares`,
+    'USD'
+FROM income_statement
+
+-- Other Income & Interest
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Other Income & Interest',
+    'Interest_Expense',
+    `Interest Expense`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Other Income & Interest',
+    'Net_Interest_Income',
+    `Net Interest Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Other Income & Interest',
+    'Other_Income_Expense',
+    `Other Income Expense`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Other Income & Interest',
+    'Normalized_Income',
+    `Normalized Income`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Other Income & Interest',
+    'Normalized_EBITDA',
+    `Normalized EBITDA`,
+    'USD'
+FROM income_statement
+
+-- Operational Add-ons
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operational Add-ons',
+    'Reconciled_Cost_Of_Revenue',
+    `Reconciled Cost Of Revenue`,
+    'USD'
+FROM income_statement
+UNION ALL
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+    'Operational Add-ons',
+    'Reconciled_Depreciation',
+    `Reconciled Depreciation`,
+    'USD'
+FROM income_statement;
+
+CREATE TABLE date_dim (
+    date_id INT PRIMARY KEY,             -- Format: YYYYMMDD
+    date DATE NOT NULL,
+    year INT,
+    quarter INT,
+    month INT,
+    month_name VARCHAR(10),
+    day INT,
+    day_of_week INT,
+    day_name VARCHAR(10),
+    is_weekend BOOLEAN,
+    is_month_start BOOLEAN,
+    is_month_end BOOLEAN,
+    is_quarter_start BOOLEAN,
+    is_quarter_end BOOLEAN,
+    is_year_start BOOLEAN,
+    is_year_end BOOLEAN,
+    fiscal_year INT,
+    fiscal_quarter INT,
+    fiscal_month INT
+);
+
+DROP VIEW Financial_Fact;
+RENAME TABLE Financial_Fact_v2 TO Financial_Fact;
+
+
+SELECT *
+FROM Financial_Fact;
+
+INSERT INTO date_dim (date_id, date, year, quarter, month, month_name, day,
+    day_of_week, day_name, is_weekend, is_month_start, is_month_end,
+    is_quarter_start, is_quarter_end, is_year_start, is_year_end,
+    fiscal_year, fiscal_quarter, fiscal_month)
+VALUES 
+-- FY2022 (ending Jan 31, 2022)
+(20220131, '2022-01-31', 2022, 1, 1, 'January', 31,
+ 1, 'Monday', FALSE, FALSE, TRUE,
+ FALSE, TRUE, FALSE, TRUE,
+ 2022, 4, 12),
+
+-- FY2023 (ending Jan 31, 2023)
+(20230131, '2023-01-31', 2023, 1, 1, 'January', 31,
+ 2, 'Tuesday', FALSE, FALSE, TRUE,
+ FALSE, TRUE, FALSE, TRUE,
+ 2023, 4, 12),
+
+-- FY2024 (ending Jan 31, 2024)
+(20240131, '2024-01-31', 2024, 1, 1, 'January', 31,
+ 3, 'Wednesday', FALSE, FALSE, TRUE,
+ FALSE, TRUE, FALSE, TRUE,
+ 2024, 4, 12),
+
+-- FY2025 (ending Jan 31, 2025)
+(20250131, '2025-01-31', 2025, 1, 1, 'January', 31,
+ 5, 'Friday', TRUE, FALSE, TRUE,
+ FALSE, TRUE, FALSE, TRUE,
+ 2025, 4, 12);
+ 
+ SELECT ff.*, d.month_name, d.quarter
+FROM Financial_Fact ff
+JOIN date_dim d ON ff.date_key = d.date_id;
+ 
+
+CREATE OR REPLACE VIEW Financial_Fact_Advanced AS
+SELECT
+  FLOOR(ff.date_key / 10000) AS fiscal_year,
+  
+  ff.date_key,
+  ff.category,
+  ff.metric,
+  ff.value,
+  
+  -- YoY: Percent change from previous year  
+  CASE
+    WHEN prev.value IS NULL THEN NULL
+    WHEN prev.value = 0 THEN NULL
+    ELSE ((ff.value - prev.value) / prev.value) * 100
+  END AS yoy_pct_change,
+  
+  -- 3-year rolling average of value  
+  (
+    SELECT AVG(ff2.value)
+    FROM Financial_Fact ff2
+    WHERE ff2.metric = ff.metric
+      AND ff2.date_key BETWEEN ff.date_key - 20000 AND ff.date_key
+  ) AS rolling_3yr_avg,
+  
+  -- Growth flag: 1 if YoY positive, 0 if negative or NULL
+  CASE
+    WHEN
+      CASE
+        WHEN prev.value IS NULL THEN NULL
+        WHEN prev.value = 0 THEN NULL
+        ELSE ((ff.value - prev.value) / prev.value) * 100
+      END > 0 THEN 1
+    ELSE 0
+  END AS yoy_growth_flag
+
+FROM Financial_Fact ff
+
+LEFT JOIN Financial_Fact prev
+  ON ff.metric = prev.metric
+  AND ff.date_key = prev.date_key + 10000  -- previous fiscal year
+;
+
+
+SELECT
+  fiscal_year,
+  date_key,
+  category,
+  metric,
+  value,
+  yoy_pct_change,
+  rolling_3yr_avg,
+  yoy_growth_flag
+FROM Financial_Fact_Advanced
+ORDER BY date_key DESC, category, metric
+LIMIT 50;
+
+SELECT *
+FROM Financial_Fact
+Limit 25;
+
+### BALANCE SHEET HISTORICAL DATA AND ORGANIZATION
+
+CREATE OR REPLACE VIEW Balance_Sheet_Fact AS
+
+-- Assets - Current
+SELECT 
+   DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d') AS date_key,
+   'Assets - Current' AS category, 'Cash and Cash Equivalents' AS metric, `Cash Cash Equivalents And Short Term Investments` AS value, 'USD' AS unit
+FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Current', 'Accounts Receivable', `Accounts Receivable`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Current', 'Inventory', `Inventory`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Current', 'Prepaid Assets', `Prepaid Assets`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Current', 'Other Current Assets', `Other Current Assets`, 'USD' FROM balance_sheet
+
+-- Assets - Non-Current
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Non-Current', 'Net PPE', `Net PPE`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Non-Current', 'Goodwill', `Goodwill`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Non-Current', 'Other Non Current Assets', `Other Non Current Assets`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Assets - Non-Current', 'Investments And Advances', `Investments And Advances`, 'USD' FROM balance_sheet
+
+-- Liabilities - Current
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Liabilities - Current', 'Accounts Payable', `Accounts Payable`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Liabilities - Current', 'Current Debt', `Current Debt`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Liabilities - Current', 'Other Current Liabilities', `Other Current Liabilities`, 'USD' FROM balance_sheet
+
+-- Liabilities - Non-Current
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Liabilities - Non-Current', 'Long Term Debt', `Long Term Debt`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Liabilities - Non-Current', 'Other Non Current Liabilities', `Other Non Current Liabilities`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Liabilities - Non-Current', 'Non Current Deferred Taxes Liabilities', `Non Current Deferred Taxes Liabilities`, 'USD' FROM balance_sheet
+
+-- Equity
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Equity', 'Common Stock Equity', `Common Stock Equity`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Equity', 'Retained Earnings', `Retained Earnings`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Equity', 'Additional Paid In Capital', `Additional Paid In Capital`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Equity', 'Tangible Book Value', `Tangible Book Value`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Equity', 'Total Equity Gross Minority Interest', `Total Equity Gross Minority Interest`, 'USD' FROM balance_sheet
+
+-- Total
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Total', 'Total Assets', `Total Assets`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Total', 'Total Liabilities Net Minority Interest', `Total Liabilities Net Minority Interest`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Total', 'Total Non Current Liabilities Net Minority Interest', `Total Non Current Liabilities Net Minority Interest`, 'USD' FROM balance_sheet
+UNION ALL
+SELECT  DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Total', 'Total Non Current Assets', `Total Non Current Assets`, 'USD' FROM balance_sheet;
+
+SHOW TABLES;
+
+DESCRIBE balance_sheet;
+
+ SELECT bs.*, d.month_name, d.quarter
+FROM Balance_Sheet_Fact bs
+JOIN date_dim d ON bs.date_key = d.date_id;
+
+SHOW COLUMNS FROM Balance_Sheet_Fact;
+
+CREATE OR REPLACE VIEW Balance_Sheet_Fact_Advanced AS
+SELECT
+  FLOOR(bs.date_key / 10000) AS fiscal_year,
+  
+  bs.date_key,
+  bs.category,
+  bs.metric,
+  bs.value,
+  
+  -- YoY: Percent change from previous year  
+  CASE
+    WHEN prev.value IS NULL THEN NULL
+    WHEN prev.value = 0 THEN NULL
+    ELSE ((bs.value - prev.value) / prev.value) * 100
+  END AS yoy_pct_change,
+  
+  -- 3-year rolling average of value  
+  (
+    SELECT AVG(bs2.value)
+    FROM Balance_Sheet_Fact bs2
+    WHERE bs2.metric = bs.metric
+      AND bs2.date_key BETWEEN bs.date_key - 20000 AND bs.date_key
+  ) AS rolling_3yr_avg,
+  
+  -- Growth flag: 1 if YoY positive, 0 if negative or NULL
+  CASE
+    WHEN
+      CASE
+        WHEN prev.value IS NULL THEN NULL
+        WHEN prev.value = 0 THEN NULL
+        ELSE ((bs.value - prev.value) / prev.value) * 100
+      END > 0 THEN 1
+    ELSE 0
+  END AS yoy_growth_flag
+
+FROM Balance_Sheet_Fact bs
+
+LEFT JOIN Balance_Sheet_Fact prev
+  ON bs.metric = prev.metric
+  AND bs.date_key = prev.date_key + 10000 
+;
+
+-- Financial Ratios
+
+CREATE OR REPLACE VIEW Balance_Sheet_Ratios AS
+SELECT
+  fiscal_year,
+  -- Current Ratio = Current Assets / Current Liabilities
+  (
+    SELECT SUM(value) FROM Balance_Sheet_Fact_Advanced
+    WHERE category = 'Assets - Current' AND fiscal_year = bs.fiscal_year
+  ) /
+  (
+    SELECT SUM(value) FROM Balance_Sheet_Fact_Advanced
+    WHERE category = 'Liabilities - Current' AND fiscal_year = bs.fiscal_year
+  ) AS current_ratio,
+
+  -- Quick Ratio = (Cash + AR + Prepaid) / Current Liabilities
+  (
+    SELECT SUM(value) FROM Balance_Sheet_Fact_Advanced
+    WHERE metric IN ('Cash and Cash Equivalents', 'Accounts Receivable', 'Prepaid Assets')
+      AND fiscal_year = bs.fiscal_year
+  ) /
+  (
+    SELECT SUM(value) FROM Balance_Sheet_Fact_Advanced
+    WHERE category = 'Liabilities - Current' AND fiscal_year = bs.fiscal_year
+  ) AS quick_ratio,
+
+  -- Debt to Equity Ratio = Total Liabilities / Equity
+  (
+    SELECT value FROM Balance_Sheet_Fact_Advanced
+    WHERE metric = 'Total Liabilities Net Minority Interest' AND fiscal_year = bs.fiscal_year
+  ) /
+  (
+    SELECT value FROM Balance_Sheet_Fact_Advanced
+    WHERE metric = 'Total Equity Gross Minority Interest' AND fiscal_year = bs.fiscal_year
+  ) AS debt_to_equity_ratio,
+
+  -- Equity Ratio = Equity / Total Assets
+  (
+    SELECT value FROM Balance_Sheet_Fact_Advanced
+    WHERE metric = 'Total Equity Gross Minority Interest' AND fiscal_year = bs.fiscal_year
+  ) /
+  (
+    SELECT value FROM Balance_Sheet_Fact_Advanced
+    WHERE metric = 'Total Assets' AND fiscal_year = bs.fiscal_year
+  ) AS equity_ratio,
+
+  -- Debt Ratio = Total Liabilities / Total Assets
+  (
+    SELECT value FROM Balance_Sheet_Fact_Advanced
+    WHERE metric = 'Total Liabilities Net Minority Interest' AND fiscal_year = bs.fiscal_year
+  ) /
+  (
+    SELECT value FROM Balance_Sheet_Fact_Advanced
+    WHERE metric = 'Total Assets' AND fiscal_year = bs.fiscal_year
+  ) AS debt_ratio,
+
+  -- Tangible Book Value Per Share
+  (
+    SELECT value FROM Balance_Sheet_Fact_Advanced
+    WHERE metric = 'Tangible Book Value' AND fiscal_year = bs.fiscal_year
+  ) /
+  (
+    SELECT value FROM balance_sheet
+    WHERE FLOOR(CAST(`Fiscal Year` AS UNSIGNED) / 10000) = bs.fiscal_year
+  ) AS tangible_book_value_per_share
+
+FROM Balance_Sheet_Fact_Advanced bs
+GROUP BY fiscal_year;
+
+
+CREATE OR REPLACE VIEW Balance_Sheet_Ratios AS
+SELECT
+  FLOOR(bs.date_key / 10000) AS fiscal_year,
+
+  -- Current Ratio: Current Assets / Current Liabilities
+  SUM(CASE WHEN bs.metric IN ('Cash and Cash Equivalents', 'Accounts Receivable', 'Inventory', 'Prepaid Assets', 'Other Current Assets')
+           THEN bs.value ELSE 0 END)
+  /
+  SUM(CASE WHEN bs.metric IN ('Accounts Payable', 'Current Debt', 'Other Current Liabilities')
+           THEN bs.value ELSE 0 END) AS current_ratio,
+
+  -- Quick Ratio: (Cash + AR + Other Current Assets) / Current Liabilities
+  SUM(CASE WHEN bs.metric IN ('Cash and Cash Equivalents', 'Accounts Receivable', 'Other Current Assets')
+           THEN bs.value ELSE 0 END)
+  /
+  SUM(CASE WHEN bs.metric IN ('Accounts Payable', 'Current Debt', 'Other Current Liabilities')
+           THEN bs.value ELSE 0 END) AS quick_ratio,
+
+  -- Debt to Equity Ratio: Total Liabilities / Total Equity
+  SUM(CASE WHEN bs.metric = 'Total Liabilities Net Minority Interest' THEN bs.value ELSE 0 END)
+  /
+  SUM(CASE WHEN bs.metric = 'Total Equity Gross Minority Interest' THEN bs.value ELSE 0 END) AS debt_to_equity_ratio,
+
+  -- Equity Ratio: Total Equity / Total Assets
+  SUM(CASE WHEN bs.metric = 'Total Equity Gross Minority Interest' THEN bs.value ELSE 0 END)
+  /
+  SUM(CASE WHEN bs.metric = 'Total Assets' THEN bs.value ELSE 0 END) AS equity_ratio,
+
+  -- Debt Ratio: Total Liabilities / Total Assets
+  SUM(CASE WHEN bs.metric = 'Total Liabilities Net Minority Interest' THEN bs.value ELSE 0 END)
+  /
+  SUM(CASE WHEN bs.metric = 'Total Assets' THEN bs.value ELSE 0 END) AS debt_ratio,
+
+  -- Tangible Book Value per Share
+  SUM(CASE WHEN bs.metric = 'Tangible Book Value' THEN bs.value ELSE 0 END)
+  /
+  NULLIF(SUM(CASE WHEN bs.metric = 'Ordinary Shares Number' THEN bs.value ELSE 0 END), 0) AS tangible_book_value_per_share
+
+FROM Balance_Sheet_Fact bs
+GROUP BY fiscal_year
+ORDER BY fiscal_year;
+
+
+SELECT * 
+FROM Balance_Sheet_Ratios
+ORDER BY fiscal_year;
+
+SELECT
+  FLOOR(bs.date_key / 10000) AS fiscal_year,
+
+
+  SUM(CASE WHEN bs.metric IN ('Cash and Cash Equivalents', 'Accounts Receivable', 'Inventory', 'Prepaid Assets', 'Other Current Assets') THEN bs.value ELSE 0 END) /
+  SUM(CASE WHEN bs.metric IN ('Accounts Payable', 'Current Debt', 'Other Current Liabilities') THEN bs.value ELSE 0 END) AS current_ratio,
+
+  SUM(CASE WHEN bs.metric IN ('Cash and Cash Equivalents', 'Accounts Receivable', 'Other Current Assets') THEN bs.value ELSE 0 END) /
+  SUM(CASE WHEN bs.metric IN ('Accounts Payable', 'Current Debt', 'Other Current Liabilities') THEN bs.value ELSE 0 END) AS quick_ratio,
+
+  SUM(CASE WHEN bs.metric = 'Total Liabilities Net Minority Interest' THEN bs.value ELSE 0 END) /
+  SUM(CASE WHEN bs.metric = 'Total Equity Gross Minority Interest' THEN bs.value ELSE 0 END) AS debt_to_equity_ratio,
+
+  SUM(CASE WHEN bs.metric = 'Total Equity Gross Minority Interest' THEN bs.value ELSE 0 END) /
+  SUM(CASE WHEN bs.metric = 'Total Assets' THEN bs.value ELSE 0 END) AS equity_ratio,
+
+  SUM(CASE WHEN bs.metric = 'Total Liabilities Net Minority Interest' THEN bs.value ELSE 0 END) /
+  SUM(CASE WHEN bs.metric = 'Total Assets' THEN bs.value ELSE 0 END) AS debt_ratio
+
+FROM Balance_Sheet_Fact bs
+GROUP BY fiscal_year
+ORDER BY fiscal_year;
+
+### CASH FLOW STATEMENT HISTORICAL DATA AND ORGANIZING
+
+CREATE OR REPLACE VIEW Cash_Flow_Fact AS
+
+-- === OPERATING ACTIVITIES ===
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d') AS date_key, 'Operating Activities' AS category, 'Operating Cash Flow' AS metric, `Operating Cash Flow` AS value, 'USD' AS unit FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Cash Flow From Continuing Operating Activities', `Cash Flow From Continuing Operating Activities`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Net Income From Continuing Operations', `Net Income From Continuing Operations`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Change In Working Capital', `Change In Working Capital`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Change In Other Current Assets', `Change In Other Current Assets`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Change In Inventory', `Change In Inventory`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Change In Payables And Accrued Expense', `Change In Payables And Accrued Expense`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Change In Accrued Expense', `Change In Accrued Expense`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Change In Payable', `Change In Payable`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Change In Account Payable', `Change In Account Payable`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Stock Based Compensation', `Stock Based Compensation`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Deferred Tax', `Deferred Tax`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Deferred Income Tax', `Deferred Income Tax`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Depreciation Amortization Depletion', `Depreciation Amortization Depletion`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Depreciation And Amortization', `Depreciation And Amortization`, 'USD' FROM cash_flow
+UNION ALL
+SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Operating Activities', 'Other Non Cash Items', `Other Non Cash Items`, 'USD' FROM cash_flow
+
+-- === INVESTING ACTIVITIES ===
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Investing Cash Flow', `Investing Cash Flow`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Cash Flow From Continuing Investing Activities', `Cash Flow From Continuing Investing Activities`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Net Investment Purchase And Sale', `Net Investment Purchase And Sale`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Net Business Purchase And Sale', `Net Business Purchase And Sale`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Sale Of Business', `Sale Of Business`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Net PPE Purchase And Sale', `Net PPE Purchase And Sale`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Sale Of PPE', `Sale Of PPE`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Purchase Of PPE', `Purchase Of PPE`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Capital Expenditure', `Capital Expenditure`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Investing Activities', 'Capital Expenditure Reported', `Capital Expenditure Reported`, 'USD' FROM cash_flow
+
+-- === FINANCING ACTIVITIES ===
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Financing Cash Flow', `Financing Cash Flow`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Cash Flow From Continuing Financing Activities', `Cash Flow From Continuing Financing Activities`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Repurchase Of Capital Stock', `Repurchase Of Capital Stock`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Repayment Of Debt', `Repayment Of Debt`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Issuance Of Debt', `Issuance Of Debt`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Net Issuance Payments Of Debt', `Net Issuance Payments Of Debt`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Long Term Debt Payments', `Long Term Debt Payments`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Long Term Debt Issuance', `Long Term Debt Issuance`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Proceeds From Stock Option Exercised', `Proceeds From Stock Option Exercised`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Common Stock Dividend Paid', `Common Stock Dividend Paid`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Cash Dividends Paid', `Cash Dividends Paid`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Net Common Stock Issuance', `Net Common Stock Issuance`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Financing Activities', 'Common Stock Payments', `Common Stock Payments`, 'USD' FROM cash_flow
+
+-- === CASH POSITION ===
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Cash Position', 'Beginning Cash Position', `Beginning Cash Position`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Cash Position', 'End Cash Position', `End Cash Position`, 'USD' FROM cash_flow
+UNION ALL SELECT DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d'),
+ 'Cash Position', 'Changes In Cash', `Changes In Cash`, 'USD' FROM cash_flow
+;
+
+ SELECT cf.*, d.month_name, d.quarter
+FROM Cash_Flow_Fact cf
+JOIN date_dim d ON cf.date_key = d.date_id;
+
+CREATE OR REPLACE VIEW Cash_Flow_Fact_Advanced AS
+SELECT
+  FLOOR(cf.date_key / 10000) AS fiscal_year,
+  
+  cf.date_key,
+  cf.category,
+  cf.metric,
+  cf.value,
+  
+  -- YoY: Percent change from previous year  
+  CASE
+    WHEN prev.value IS NULL THEN NULL
+    WHEN prev.value = 0 THEN NULL
+    ELSE ((cf.value - prev.value) / prev.value) * 100
+  END AS yoy_pct_change,
+  
+  -- 3-year rolling average of value  
+  (
+    SELECT AVG(cf2.value)
+    FROM Cash_Flow_Fact cf2
+    WHERE cf2.metric = cf.metric
+      AND cf2.date_key BETWEEN cf.date_key - 20000 AND cf.date_key
+  ) AS rolling_3yr_avg,
+  
+  -- Growth flag: 1 if YoY positive, 0 if negative or NULL
+  CASE
+    WHEN
+      CASE
+        WHEN prev.value IS NULL THEN NULL
+        WHEN prev.value = 0 THEN NULL
+        ELSE ((cf.value - prev.value) / prev.value) * 100
+      END > 0 THEN 1
+    ELSE 0
+  END AS yoy_growth_flag
+
+FROM Cash_Flow_Fact cf
+
+LEFT JOIN Cash_Flow_Fact prev
+  ON cf.metric = prev.metric
+  AND cf.date_key = prev.date_key + 10000 
+;
+
+CREATE OR REPLACE VIEW Cash_Flow_Ratios AS
+SELECT
+  FLOOR(cf.date_key / 10000) AS fiscal_year,
+  
+  -- Free Cash Flow Margin: Free Cash Flow / Operating Cash Flow
+  MAX(CASE WHEN cf.metric = 'Free Cash Flow' THEN cf.value END) /
+  NULLIF(MAX(CASE WHEN cf.metric = 'Operating Cash Flow' THEN cf.value END), 0) AS free_cash_flow_margin,
+  
+  -- CapEx Ratio: Capital Expenditure / Operating Cash Flow
+  MAX(CASE WHEN cf.metric = 'Capital Expenditure' THEN cf.value END) /
+  NULLIF(MAX(CASE WHEN cf.metric = 'Operating Cash Flow' THEN cf.value END), 0) AS capex_ratio,
+  
+  -- Cash Flow Coverage Ratio: Operating Cash Flow / Total Debt
+  MAX(CASE WHEN cf.metric = 'Operating Cash Flow' THEN cf.value END) /
+  NULLIF((SELECT MAX(value) FROM Balance_Sheet_Fact WHERE metric = 'Total Debt' AND FLOOR(date_key / 10000) = FLOOR(cf.date_key / 10000)), 0) AS cash_flow_coverage_ratio,
+  
+  -- Dividend Payout Ratio (Cash): Cash Dividends Paid / Operating Cash Flow
+  MAX(CASE WHEN cf.metric = 'Cash Dividends Paid' THEN cf.value END) /
+  NULLIF(MAX(CASE WHEN cf.metric = 'Operating Cash Flow' THEN cf.value END), 0) AS dividend_payout_ratio,
+  
+  -- Debt Repayment Ratio: Repayment Of Debt / Operating Cash Flow
+  MAX(CASE WHEN cf.metric = 'Repayment Of Debt' THEN cf.value END) /
+  NULLIF(MAX(CASE WHEN cf.metric = 'Operating Cash Flow' THEN cf.value END), 0) AS debt_repayment_ratio
+
+FROM Cash_Flow_Fact cf
+GROUP BY fiscal_year
+ORDER BY fiscal_year;
+
+CREATE OR REPLACE VIEW Cash_Flow_Ratios AS
+WITH base AS (
+  SELECT
+    FLOOR(date_key / 10000) AS fiscal_year,
+    metric,
+    value
+  FROM Cash_Flow_Fact
+)
+SELECT
+  fiscal_year,
+
+  -- Free Cash Flow Margin
+  MAX(CASE WHEN metric = 'Free Cash Flow' THEN value END) /
+  NULLIF(MAX(CASE WHEN metric = 'Operating Cash Flow' THEN value END), 0) AS free_cash_flow_margin,
+
+  -- CapEx Ratio
+  MAX(CASE WHEN metric = 'Capital Expenditure' THEN value END) /
+  NULLIF(MAX(CASE WHEN metric = 'Operating Cash Flow' THEN value END), 0) AS capex_ratio,
+
+  -- Dividend Payout Ratio
+  MAX(CASE WHEN metric = 'Cash Dividends Paid' THEN value END) /
+  NULLIF(MAX(CASE WHEN metric = 'Operating Cash Flow' THEN value END), 0) AS dividend_payout_ratio,
+
+  -- Debt Repayment Ratio
+  MAX(CASE WHEN metric = 'Repayment Of Debt' THEN value END) /
+  NULLIF(MAX(CASE WHEN metric = 'Operating Cash Flow' THEN value END), 0) AS debt_repayment_ratio
+
+FROM base
+GROUP BY fiscal_year
+ORDER BY fiscal_year;
+
+SELECT * 
+FROM Cash_Flow_Ratios
+ORDER BY fiscal_year;
+
+### STOCK HISTORY DATA AND ORGANIZING
+
+CREATE OR REPLACE VIEW Stock_History_Fact AS
+SELECT
+    DATE_FORMAT(STR_TO_DATE(Date, '%Y-%m-%d'), '%Y%m%d') AS date_key,
+    'Open' AS metric,
+    `Open` AS value,
+    'USD' AS unit
+FROM stock_history
+
+UNION ALL
+
+SELECT
+    DATE_FORMAT(STR_TO_DATE(Date, '%Y-%m-%d'), '%Y%m%d'),
+    'High',
+    `High`,
+    'USD'
+FROM stock_history
+
+UNION ALL
+
+SELECT
+    DATE_FORMAT(STR_TO_DATE(Date, '%Y-%m-%d'), '%Y%m%d'),
+    'Low',
+    `Low`,
+    'USD'
+FROM stock_history
+
+UNION ALL
+
+SELECT
+    DATE_FORMAT(STR_TO_DATE(Date, '%Y-%m-%d'), '%Y%m%d'),
+    'Close',
+    `Close`,
+    'USD'
+FROM stock_history
+
+UNION ALL
+
+SELECT
+    DATE_FORMAT(STR_TO_DATE(Date, '%Y-%m-%d'), '%Y%m%d'),
+    'Volume',
+    `Volume`,
+    'Shares'
+FROM stock_history
+
+UNION ALL
+
+SELECT
+    DATE_FORMAT(STR_TO_DATE(Date, '%Y-%m-%d'), '%Y%m%d'),
+    'Dividends',
+    `Dividends`,
+    'USD'
+FROM stock_history
+
+UNION ALL
+
+SELECT
+    DATE_FORMAT(STR_TO_DATE(Date, '%Y-%m-%d'), '%Y%m%d'),
+    'Stock Splits',
+    `Stock Splits`,
+    'Ratio'
+FROM stock_history;
+
+SELECT
+  d.date AS full_date,
+  d.fiscal_year,
+  f.metric,
+  f.value,
+  f.unit
+FROM Stock_History_Fact f
+JOIN Date_Dim d
+  ON f.date_key = d.date_id
+ORDER BY d.date;
+
+DESCRIBE Date_Dim;
+
+CREATE OR REPLACE VIEW Stock_Yearly_Avg_Close AS
+SELECT
+  d.fiscal_year,
+  AVG(f.value) AS avg_close_price
+FROM Stock_History_Fact f
+JOIN Date_Dim d ON f.date_key = d.date_id
+WHERE f.metric = 'Close'
+GROUP BY d.fiscal_year
+ORDER BY d.fiscal_year;
+
+CREATE OR REPLACE VIEW Stock_YoY_Change AS
+SELECT
+  curr.fiscal_year,
+  curr.avg_close_price,
+  prev.avg_close_price AS prev_year_avg_close,
+  CASE
+    WHEN prev.avg_close_price IS NULL THEN NULL
+    ELSE ((curr.avg_close_price - prev.avg_close_price) / prev.avg_close_price) * 100
+  END AS yoy_pct_change
+FROM Stock_Yearly_Avg_Close curr
+LEFT JOIN Stock_Yearly_Avg_Close prev ON curr.fiscal_year = prev.fiscal_year + 1
+ORDER BY curr.fiscal_year;
+
+CREATE OR REPLACE VIEW Stock_Dividend_Yield AS
+SELECT
+  d.fiscal_year,
+  SUM(CASE WHEN f.metric = 'Dividends' THEN f.value ELSE 0 END) AS total_dividends,
+  AVG(CASE WHEN f.metric = 'Close' THEN f.value ELSE NULL END) AS avg_close_price,
+  CASE
+    WHEN AVG(CASE WHEN f.metric = 'Close' THEN f.value ELSE NULL END) = 0 THEN NULL
+    ELSE (SUM(CASE WHEN f.metric = 'Dividends' THEN f.value ELSE 0 END) /
+          AVG(CASE WHEN f.metric = 'Close' THEN f.value ELSE NULL END)) * 100
+  END AS dividend_yield_pct
+FROM Stock_History_Fact f
+JOIN Date_Dim d ON f.date_key = d.date_id
+WHERE f.metric IN ('Close', 'Dividends')
+GROUP BY d.fiscal_year
+ORDER BY d.fiscal_year;
+
+CREATE OR REPLACE VIEW Stock_Daily_Returns AS
+SELECT
+  f.date_key,
+  d.fiscal_year,
+  f.value AS close_price,
+  LAG(f.value) OVER (ORDER BY f.date_key) AS prev_close,
+  CASE
+    WHEN LAG(f.value) OVER (ORDER BY f.date_key) = 0 THEN NULL
+    ELSE (f.value - LAG(f.value) OVER (ORDER BY f.date_key)) / LAG(f.value) OVER (ORDER BY f.date_key)
+  END AS daily_return
+FROM Stock_History_Fact f
+JOIN Date_Dim d ON f.date_key = d.date_id
+WHERE f.metric = 'Close';
+
+CREATE OR REPLACE VIEW Stock_Volatility AS
+SELECT
+  fiscal_year,
+  STDDEV_POP(daily_return) AS volatility
+FROM Stock_Daily_Returns
+GROUP BY fiscal_year
+ORDER BY fiscal_year;
+
+CREATE OR REPLACE VIEW Stock_PE_Ratio AS
+SELECT
+  s.fiscal_year,
+  s.avg_close_price,
+  i.eps,
+  CASE
+    WHEN i.eps = 0 THEN NULL
+    ELSE s.avg_close_price / i.eps
+  END AS pe_ratio
+FROM
+  (SELECT
+     d.fiscal_year,
+     AVG(f.value) AS avg_close_price
+   FROM Stock_History_Fact f
+   JOIN Date_Dim d ON f.date_key = d.date_id
+   WHERE f.metric = 'Close'
+   GROUP BY d.fiscal_year) s
+JOIN
+  (SELECT
+     date_key,
+     fiscal_year,
+     (Net_Income / Shares_Outstanding) AS eps  
+   FROM Financial_Fact
+   JOIN Date_Dim USING (date_key)
+  ) i ON s.fiscal_year = i.fiscal_year
+ORDER BY s.fiscal_year;
+
+
+SHOW COLUMNS FROM Financial_Fact;
+
+CREATE OR REPLACE VIEW Stock_PE_Ratio AS
+WITH
+  NetIncome AS (
+    SELECT date_key, value AS net_income
+    FROM Financial_Fact
+    WHERE metric = 'Net Income'
+  ),
+  SharesOutstanding AS (
+    SELECT date_key, value AS shares_outstanding
+    FROM Financial_Fact
+    WHERE metric = 'Shares Outstanding'
+  ),
+  EPS AS (
+    SELECT
+      n.date_key,
+      CASE
+        WHEN s.shares_outstanding = 0 OR s.shares_outstanding IS NULL THEN NULL
+        ELSE n.net_income / s.shares_outstanding
+      END AS eps
+    FROM NetIncome n
+    LEFT JOIN SharesOutstanding s ON n.date_key = s.date_key
+  )
+SELECT
+  d.fiscal_year,
+  AVG(shf.value) AS avg_close_price,
+  AVG(e.eps) AS eps,
+  CASE
+    WHEN AVG(e.eps) = 0 THEN NULL
+    ELSE AVG(shf.value) / AVG(e.eps)
+  END AS pe_ratio
+FROM Stock_History_Fact shf
+JOIN Date_Dim d ON shf.date_key = d.date_id
+LEFT JOIN EPS e ON e.date_key = shf.date_key
+WHERE shf.metric = 'Close'
+GROUP BY d.fiscal_year
+ORDER BY d.fiscal_year;
+
+SHOW TABLES FROM target_financials;
+
+### DATA CLEANING
+
+SELECT metric, COUNT(*) AS null_count
+FROM cash_flow_fact
+WHERE value IS NULL
+GROUP BY metric;
+
+SELECT *
+FROM Cash_Flow_Fact
+WHERE value IS NULL;
+
+DELETE FROM Cash_Flow_Fact
+WHERE date_key = '20210131'
+  AND value IS NULL;
+  
+  DELETE FROM financial_fact
+WHERE date_key = '20210131'
+  AND category = 'Operating Activities'
+  AND metric IN (
+    'Operating Cash Flow',
+    'Cash Flow From Continuing Operating Activities',
+    'Net Income From Continuing Operations',
+    'Change In Working Capital',
+    'Change In Other Current Assets',
+    'Change In Inventory',
+    'Change In Payables And Accrued Expense',
+    'Change In Accrued Expense',
+    'Change In Payable',
+    'Change In Account Payable',
+    'Stock Based Compensation'
+  )
+  AND value IS NULL;
+  
+  SHOW FULL TABLES IN target_financials WHERE TABLE_TYPE = 'BASE TABLE';
+  
+  SELECT *
+  FROM cash_flow;
+  
+  DELETE FROM cash_flow
+WHERE `Fiscal Year` = '1/31/2021';
+
+SELECT *
+FROM balance_sheet;
+
+DELETE FROM balance_sheet
+WHERE `Fiscal Year` = '1/31/2021';
+
+SELECT *
+FROM income_statement;
+
+DELETE FROM income_statement
+WHERE `Fiscal Year` = '1/31/2021';
+
+SELECT *
+FROM stock_history;
+
+SELECT metric, COUNT(*) AS null_count
+FROM stock_history_fact
+WHERE value IS NULL
+GROUP BY metric;
+
+SELECT metric, COUNT(*) AS null_count
+FROM date_dim
+WHERE value IS NULL
+GROUP BY metric;
+
+SELECT DISTINCT date_key 
+FROM cash_flow 
+WHERE date_key NOT IN (SELECT DISTINCT date_key FROM income_statement);
+
+DESCRIBE income_statement;
+DESCRIBE cash_flow;
+
+ALTER TABLE cash_flow ADD COLUMN date_key VARCHAR(8);
+
+UPDATE cash_flow
+	SET date_key = DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d');
+    
+ALTER TABLE income_statement ADD COLUMN date_key VARCHAR(8);
+
+UPDATE income_statement
+	SET date_key = DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d');
+    
+ALTER TABLE balance_sheet ADD COLUMN date_key VARCHAR(8);
+
+UPDATE balance_sheet
+	SET date_key = DATE_FORMAT(STR_TO_DATE(`Fiscal Year`, '%m/%d/%Y'), '%Y%m%d');
+
+DESCRIBE stock_history;
+
+ALTER TABLE stock_history ADD COLUMN date_key VARCHAR(8);
+
+UPDATE stock_history
+SET date_key = DATE_FORMAT(`Date`, '%Y%m%d');
