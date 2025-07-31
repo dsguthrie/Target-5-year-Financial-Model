@@ -15,10 +15,10 @@ This project is a complete 5-year financial forecast and valuation model of Targ
 - PowerBI (Not Shown)
 
 # Target-5-year-Financial-Model files
--python.scrpaer
--python.sqluploader
--mysql
--Target 5 year Financial Model
+- python.scraper
+- python.sqluploader
+- mysql
+- Target-5 year Financial Model
 
 
 
