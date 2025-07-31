@@ -1,0 +1,161 @@
+### TARGET FINANCIALS/STOCK HISTORY
+
+import yfinance as yf
+import pandas as pd
+from datetime import datetime
+
+# Create a folder-safe date tag
+today = datetime.today().strftime('%Y-%m-%d')
+
+# Initialize TGT ticker from Yahoo Finance
+ticker = yf.Ticker("TGT")
+
+income_statement = ticker.financials.T
+balance_sheet = ticker.balance_sheet.T
+cash_flow = ticker.cashflow.T
+
+stock_history = ticker.history(period="10y")
+
+income_statement.to_csv(f"IncomeStatement_{today}.csv")
+balance_sheet.to_csv(f"BalanceSheet_{today}.csv")
+cash_flow.to_csv(f"CashFlow_{today}.csv")
+stock_history.to_csv(f"StockHistory_{today}.csv")
+
+print("Financial data downloaded and saved!")
+
+### TARGET MARKET DATA SCRAPER
+
+import yfinance as yf
+import pandas as pd
+
+def get_beta_and_capital_structure(ticker_symbol="TGT"):
+    ticker = yf.Ticker(ticker_symbol)
+    info = ticker.info
+
+    beta = info.get("beta")
+    market_cap = info.get("marketCap")
+    total_debt = info.get("totalDebt")
+    enterprise_value = info.get("enterpriseValue")
+
+    if market_cap and total_debt:
+        equity_pct = market_cap / (market_cap + total_debt)
+        debt_pct = total_debt / (market_cap + total_debt)
+    else:
+        equity_pct = debt_pct = None
+
+    return {
+        "beta": beta,
+        "market_cap": market_cap,
+        "total_debt": total_debt,
+        "enterprise_value": enterprise_value,
+        "equity_pct": equity_pct,
+        "debt_pct": debt_pct
+    }
+
+if __name__ == "__main__":
+    data = get_beta_and_capital_structure("TGT")
+    df = pd.DataFrame([data])
+    df.to_csv("target_capital_structure.csv", index=False)
+    print("Data exported to target_capital_structure.csv")
+
+### TARGET RISK-FREE RATE
+    
+    import requests
+import pandas as pd
+from datetime import datetime
+
+def get_risk_free_rate_from_fred():
+    url = "https://api.stlouisfed.org/fred/series/observations"
+    params = {
+        "series_id": ,
+        "api_key": ,  
+        "file_type": ,
+        "sort_order": ,
+        "limit": 1
+    }
+
+    response = requests.get(url, params=params).json()
+    value = response["observations"][0]["value"]
+    date = response["observations"][0]["date"]
+
+    return float(value), date
+
+if __name__ == "__main__":
+    rate, date = get_risk_free_rate_from_fred()
+    df = pd.DataFrame([{
+        "Date": date,
+        "10Y Risk-Free Rate (%)": rate
+    }])
+    df.to_csv("risk_free_rate.csv", index=False)
+    print(f"Risk-Free Rate as of {date}: {rate}% → saved to risk_free_rate.csv")
+
+### TARGET EV/EBITDA COMPARABLES
+
+    import yfinance as yf
+import pandas as pd
+
+# List of comparable tickers (you can add more)
+tickers = ['TGT', 'WMT', 'COST', 'DG', 'BBY']
+
+# Dictionary to store results
+results = []
+
+for ticker in tickers:
+    stock = yf.Ticker(ticker)
+    info = stock.info
+
+    # Capture key stats
+    results.append({
+        "Ticker": ticker,
+        "Company": info.get("longName"),
+        "EV/EBITDA": info.get("enterpriseToEbitda", "N/A"),
+        "Market Cap (B)": round(info.get("marketCap", 0) / 1e9, 2),
+        "EBITDA (B)": round(info.get("ebitda", 0) / 1e9, 2)
+    })
+
+# Convert to DataFrame
+df = pd.DataFrame(results)
+
+# Display & optionally export
+print(df)
+df.to_csv("ev_ebitda_comps.csv", index=False)
+
+### TARGET VALUATION HISTORY
+
+import yfinance as yf
+import pandas as pd
+
+ticker = yf.Ticker("TGT")
+
+# Pull key info
+info = ticker.info
+shares_outstanding = info.get("sharesOutstanding", 0)
+
+# Income statement
+income_stmt = ticker.income_stmt.T  # T to flip years to rows
+
+# Pull only what's needed
+df = income_stmt[["Net Income", "Total Revenue"]].copy()
+df.index = df.index.year
+df.rename(columns={"Total Revenue": "Revenue"}, inplace=True)
+
+# Calculate EPS (Net Income / Shares Outstanding)
+df["Diluted EPS"] = df["Net Income"] / shares_outstanding
+df["Diluted Shares (MM)"] = shares_outstanding / 1e6
+
+# Pull year-end share price
+hist = ticker.history(period="5y", interval="1mo")
+hist = hist[hist.index.is_month_end]
+hist["Year"] = hist.index.year
+price_df = hist.groupby("Year").last()[["Close"]].rename(columns={"Close": "Year-End Share Price"})
+
+# Merge with financials
+df = df.merge(price_df, left_index=True, right_index=True, how="left")
+
+# Calculate P/E Ratio
+df["P/E Ratio"] = df["Year-End Share Price"] / df["Diluted EPS"]
+
+# Export
+df = df[["Revenue", "Net Income", "Diluted EPS", "Diluted Shares (MM)", "Year-End Share Price", "P/E Ratio"]]
+df.to_csv("target_valuation_history.csv", index_label="Year")
+print("target_valuation_history.csv created successfully!")
