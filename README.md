@@ -50,5 +50,5 @@ This project is a complete 5-year financial forecast and valuation model of Targ
 # Contact
 
 Drake Guthrie  
-[LinkedIn] (www.linkedin.com/in/drake-guthrie-190691234)  
-GitHub: [@yourusername](https://github.com/yourusername)
+LinkedIn: (www.linkedin.com/in/drake-guthrie-190691234)  
+GitHub: [dsguthrie](https://github.com/dsguthrie)
